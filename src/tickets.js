@@ -179,8 +179,9 @@ const TicketCollection = {
        */
       (index) => this[tickets][index]
     );
-    return winners
+    return winners;
   },
 };
 
-const collection = new TicketCollection();
+const ticketCollection = new TicketCollection();
+module.exports = ticketCollection;
