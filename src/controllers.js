@@ -20,3 +20,35 @@ exports.sellingBulkTicket = (req, res) => {
     tickets,
   });
 };
+
+// find ticker controllers
+
+exports.findAll = (req, res) => {
+  const tickets = ticketCollection.find();
+  res.status(200).json({
+    items: tickets,
+    total: tickets.length,
+  });
+};
+
+// single tickets
+
+exports.findById = (req, res) => {
+  const id = req.params.id;
+  const ticket = ticketCollection.findById(id);
+  if (!ticket) {
+    return res.status(404).json({
+      message: '404 not found!',
+    });
+  }
+  res.status(200).json(ticket);
+};
+
+exports.findTicketByUserName = (req, res) => {
+  const username = req.params.username;
+  const tickets = ticketCollection.findTicketByUserName(username);
+  res.status(200).json({
+    items: tickets,
+    total: tickets.length,
+  });
+};
