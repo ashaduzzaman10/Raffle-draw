@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/ashaduzzaman10/Raffle-draw/compare/v1.10.0...v1.11.0) (2024-03-16)
+
+
+### Features
+
+* implimenting route and controllers ([fc50823](https://github.com/ashaduzzaman10/Raffle-draw/commit/fc50823e0dd49331eb8161fdd85a0736a520ea00))
+
 ## [1.10.0](https://github.com/ashaduzzaman10/Raffle-draw/compare/v1.9.0...v1.10.0) (2024-03-16)
 
 
