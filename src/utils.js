@@ -1,7 +1,7 @@
-const { json } = require("express");
-const fs = require("fs/promises");
-const path = require("path");
-const dbPath = path.resolve("data", "db.json");
+const { json } = require('express');
+const fs = require('fs/promises');
+const path = require('path');
+const dbPath = path.resolve('data', 'db.json');
 
 exports.readFile = async () => {
   const data = await fs.readFile(dbPath);
