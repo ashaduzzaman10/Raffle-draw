@@ -1,0 +1,10 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## 1.2.0 (2024-03-16)
+
+
+### Features
+
+* add standard release  && express server && requiments of this project ([0a68a3f](https://github.com/ashaduzzaman10/Raffle-draw/commit/0a68a3f804a4c89e267fdc920cb32658ab54bc07))

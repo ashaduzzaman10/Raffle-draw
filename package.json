@@ -1,6 +1,6 @@
 {
   "name": "Raffle-draw",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "node/express projects",
   "main": "index.js",
   "repository": "https://github.com/ashaduzzaman10/Raffle-draw.git",
