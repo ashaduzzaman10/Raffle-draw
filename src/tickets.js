@@ -94,8 +94,10 @@ const TicketCollection = {
 
   updateById(ticketId, ticketBody) {
     const ticket = this.findTicketById(ticketId);
-    ticket.username = ticketBody.username ?? ticket.username;
-    ticket.price = ticketBody.price ?? ticket.price;
+    if (ticket) {
+      ticket.username = ticketBody.username ?? ticket.username;
+      ticket.price = ticketBody.price ?? ticket.price;
+   }
     return ticket;
   },
 
