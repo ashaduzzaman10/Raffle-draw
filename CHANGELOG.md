@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/ashaduzzaman10/Raffle-draw/compare/v1.7.0...v1.8.0) (2024-03-16)
+
+
+### Features
+
+* implimenting crud operation for ticket ([565c716](https://github.com/ashaduzzaman10/Raffle-draw/commit/565c716582ffe7df6d83c76265e83ed49f869077))
+
 ## [1.7.0](https://github.com/ashaduzzaman10/Raffle-draw/compare/v1.6.0...v1.7.0) (2024-03-16)
 
 
