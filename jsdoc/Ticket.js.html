@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: Ticket.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,65 +17,36 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: Ticket.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>Raffle-draw express projects</h1>
-<h4> Requirements of this projects  </h4>
-<p>-&gt; sell new tickets</p>
-<p>-&gt; sell multiple tickets at once to a single user</p>
-<p>-&gt; each ticket will have the following properties</p>
-<ul>
-<li>
-ticket id 
-</li>
-<li>
-username
-</li>
-<li>
-price
-</li>
-<li>
-createAt
-</li>
-<li>
-updateAt
-</li>
-<br>
-<p>-&gt; get all tickets</p>
-<p>-&gt; get all ticket by id</p>
-<p>-&gt; get all tickets by username</p>
-<p>-&gt; update ticket by id</p>
-<p>-&gt; update tickets by username</p>
-<p>-&gt; delete ticket by id</p>
-<p>-&gt; delete tickets by useName</p>
-<p>-&gt; draw to get winners</p></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>const shortid = require('shortid');
+
+class Ticket {
+  /**
+   * Ticket constructor will receive username and price
+   * @param {string} username
+   * @param {number} price
+   */
+  constructor(username, price) {
+    this.id = shortid.generate();
+    this.username = username;
+    this.price = price;
+    this.createAt = new Date();
+    this.updatedAt = new Date();
+  }
+}
+
+
+module.exports = Ticket;</code></pre>
+        </article>
     </section>
-
-
 
 
 
