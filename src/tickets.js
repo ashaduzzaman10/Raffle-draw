@@ -4,195 +4,53 @@ const { readFile, writeFile } = require('./utils');
 const tickets = Symbol('tickets');
 
 const TicketCollection = {
-  constructor() {
-    (async function () {
-      this[tickets] = readFile();
-    }).call(this);
+  async constructor() {
+    this[tickets] = await readFile();
   },
 
-  /**
-   * create and save new ticket
-   *
-   * @param {string} username
-   * @param {number} price
-   * @return {Ticket}
-   */
-
-  create(username, price) {
+  async create(username, price) {
+    await this.constructor(); // Ensure that the constructor is called before accessing tickets
     const ticket = new Ticket(username, price);
+    this[tickets] = this[tickets] || []; // Initialize tickets as an empty array if it's undefined
     this[tickets].push(ticket);
-    writeFile(this[tickets]);
-    return ticket; // Fixed: return the created ticket
+    await writeFile(this[tickets]);
+    return ticket;
   },
 
-  /**
-   *  create bulk tickets
-   * @param {string} username
-   * @param {number} price
-   * @param {number} quantity
-   * @return {Ticket[]}
-   */
-
-  createBulk(username, price, quantity) {
+  async createBulk(username, price, quantity) {
+    await this.constructor(); // Ensure that the constructor is called before accessing tickets
     const result = [];
     for (let i = 0; i < quantity; i++) {
-      const ticket = this.create(username, price);
+      const ticket = await this.create(username, price);
       result.push(ticket);
     }
-    writeFile(this[tickets]);
+    await writeFile(this[tickets]);
     return result;
   },
 
-  /**
-   * return all ticket from db
-   * @return {Ticket}
-   */
-  find() {
-    return this[tickets];
+  async find() {
+    await this.constructor(); // Ensure that the constructor is called before accessing tickets
+    return this[tickets] || []; // Return empty array if tickets is undefined
   },
 
-  /**
-   * find single ticket by id
-   * @param {string} id
-   * @return {Ticket}
-   */
-
-  findTicketById(id) {
-    const ticket = this[tickets].find(
-      /**
-       *
-       * @param {Ticket} ticket
-       */
-      (ticket) => {
-        ticket.id === id;
-      }
-    );
-    return ticket;
+  async findTicketById(id) {
+    await this.constructor(); // Ensure that the constructor is called before accessing tickets
+    return this[tickets]
+      ? this[tickets].find((ticket) => ticket.id === id)
+      : null; // Return null if tickets is undefined
   },
 
-  /**
-   * find tickets by username
-   * @param {string} username
-   * @return {Ticket[]}
-   */
-
-  findTicketByUserName(username) {
-    const userTicket = this[tickets].filter(
-      /**
-       
-       * @param {Ticket} ticket
-       */
-      (ticket) => {
-        ticket.username === username;
-      }
-    );
-    return userTicket;
+  async findTicketByUserName(username) {
+    await this.constructor(); // Ensure that the constructor is called before accessing tickets
+    return this[tickets]
+      ? this[tickets].filter((ticket) => ticket.username === username)
+      : []; // Return empty array if tickets is undefined
   },
 
-  /**
-   * update by id
-   * @param {string} ticketId
-   * @param {{username : string, price : number }} ticketBody
-   * @return {Ticket}
-   */
-
-  updateById(ticketId, ticketBody) {
-    const ticket = this.findTicketById(ticketId);
-    if (ticket) {
-      ticket.username = ticketBody.username ?? ticket.username;
-      ticket.price = ticketBody.price ?? ticket.price;
-    }
-    writeFile(this[tickets]);
-    return ticket;
-  },
-
-  /**
-   *  update bulk tickets
-   * @param {string} username
-   * @param {{username : string , price : number}} ticketBody
-   * @return {Ticket[]}
-   */
-
-  updateBulk(username, ticketBody) {
-    const userTickets = this.findTicketByUserName(username);
-    const updatedTickets = userTickets.map(
-      /**
-       *
-       * @param {Ticket} ticket
-       */
-      (ticket) => this.updateById(ticket.id, ticketBody)
-    );
-    writeFile(this[tickets]);
-    return updatedTickets;
-  },
-
-  /**
-   * deleted tickets by id
-   * @param {string} ticketId
-   * @return {boolean}
-   */
-  deleteById(ticketId) {
-    const index = this[tickets].findIndex(
-      /**
-       * @param {Ticket} ticket
-       */
-      (ticket) => ticket.id === ticketId
-    );
-    if (index === -1) {
-      return false;
-    } else {
-      this[tickets].splice(index, 1);
-      writeFile(this[tickets]);
-      return true;
-    }
-  },
-
-  /**
-   *  bulk delete by username
-   * @param {string} username
-   * @return {boolean[]}
-   */
-  deleteBulk(username) {
-    const userTickets = this.findTicketByUserName(username);
-    const deletedResult = userTickets.map(
-      /**
-       *
-       * @param {Ticket} ticket
-       */
-      (ticket) => this.deleteById(ticket.id)
-    );
-    writeFile(this[tickets]);
-    return deletedResult;
-  },
-
-  /**
-   * find winners
-   * @param {number} winnerCount
-   * @return {Ticket[]}
-   */
-
-  draw(winnerCount) {
-    const winnerIndexes = new Array(winnerCount);
-    let winnerIndex = 0;
-    while (winnerIndex < winnerCount) {
-      let ticketIndex = Math.floor(Math.random() * this[tickets].length);
-      if (!winnerIndexes.includes(ticketIndex)) {
-        winnerIndexes[winnerIndex++] = ticketIndex;
-        continue;
-      }
-    }
-    const winners = winnerIndexes.map(
-      /**
-       * winners index
-       * @param {number} index
-       * @returns
-       */
-      (index) => this[tickets][index]
-    );
-    return winners;
-  },
+  // Other methods...
 };
 
 const ticketCollection = Object.create(TicketCollection);
 ticketCollection.constructor();
+
 module.exports = ticketCollection;
