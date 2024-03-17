@@ -19,7 +19,7 @@ const TicketCollection = {
   create(username, price) {
     const ticket = new Ticket(username, price);
     this[tickets].push(ticket);
-    return tickets;
+    return ticket; // Fixed: return the created ticket
   },
 
   /**
@@ -97,7 +97,7 @@ const TicketCollection = {
     if (ticket) {
       ticket.username = ticketBody.username ?? ticket.username;
       ticket.price = ticketBody.price ?? ticket.price;
-   }
+    }
     return ticket;
   },
 
@@ -185,5 +185,6 @@ const TicketCollection = {
   },
 };
 
-const ticketCollection = new TicketCollection();
+const ticketCollection = Object.create(TicketCollection);
+ticketCollection.constructor();
 module.exports = ticketCollection;
