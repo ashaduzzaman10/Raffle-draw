@@ -25,6 +25,7 @@ exports.sellingBulkTicket = (req, res) => {
 
 exports.findAll = (req, res) => {
   const tickets = ticketCollection.find();
+  console.log(tickets);
   res.status(200).json({
     items: tickets,
     total: tickets.length,

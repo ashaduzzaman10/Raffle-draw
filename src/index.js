@@ -24,6 +24,7 @@ app.use((_req, _res, next) => {
 
 // error handler
 app.use((error, _req, res, _next) => {
+  console.log(error);
   if (error.status) {
     return res.status(error.status).json({
       message: error.message,

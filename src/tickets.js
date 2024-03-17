@@ -6,9 +6,8 @@ const tickets = Symbol('tickets');
 const TicketCollection = {
   constructor() {
     (async function () {
-      const data = await readFile();
-      this[tickets] = data;
-    }).bind(this);
+      this[tickets] = readFile();
+    }).bind(this)();
   },
 
   /**
