@@ -7,7 +7,7 @@ const TicketCollection = {
   constructor() {
     (async function () {
       this[tickets] = readFile();
-    }).bind(this)();
+    }).call(this);
   },
 
   /**
@@ -22,7 +22,7 @@ const TicketCollection = {
     const ticket = new Ticket(username, price);
     this[tickets].push(ticket);
     writeFile(this[tickets]);
-    return tickets; // Fixed: return the created ticket
+    return ticket; // Fixed: return the created ticket
   },
 
   /**
@@ -77,7 +77,7 @@ const TicketCollection = {
    */
 
   findTicketByUserName(username) {
-    const ticket = this[tickets].filter(
+    const userTicket = this[tickets].filter(
       /**
        
        * @param {Ticket} ticket
@@ -86,7 +86,7 @@ const TicketCollection = {
         ticket.username === username;
       }
     );
-    return ticket;
+    return userTicket;
   },
 
   /**
